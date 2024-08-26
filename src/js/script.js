@@ -16,7 +16,7 @@ import neptuneTexture from "../img/neptunemap.jpg";
 import plutoTexture from "../img/plutomap.jpg";
 
 //Instanciando o renderizador
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -37,7 +37,7 @@ camera.position.set(-90, 140, 140);
 orbit.update();
 
 //LUX AMBIENTE DA CENA
-const ambientLight = new THREE.AmbientLight(0x333333, 3);
+const ambientLight = new THREE.AmbientLight(0x333333, 7);
 scene.add(ambientLight);
 
 //ADICIONANDO TEXTURA NO BACKGROUND DA CENA
@@ -92,15 +92,23 @@ function createPlanet(size, texture, position, ring) {
 
 //PLANETS
 const mercury = createPlanet(3.2, mercuryTexture, 28);
-const venus = createPlanet(6, venusTexture, 50);
+const venus = createPlanet(5.8, venusTexture, 50);
+const earth = createPlanet(6, earthTexture, 62);
+const mars = createPlanet(4, marsTexure, 78);
+const jupiter = createPlanet(12, jupiterTexture, 100);
 const saturn = createPlanet(10, saturnTexture, 138, {
-    innerRadius: 10,
-    outerRadius: 20,
-    texture: saturnRingTexture,
+  innerRadius: 10,
+  outerRadius: 20,
+  texture: saturnRingTexture,
   
 });
-
-
+const uranus = createPlanet(7, uranusTexture, 176, {
+  innerRadius: 7,
+  outerRadius: 17,
+  texture: uranusRingTexture
+});
+const neptune = createPlanet(7, neptuneTexture, 200);
+const pluto = createPlanet(2.8, plutoTexture, 216);
 
 //POINTLIGHT
 //Parâmetros: cor, intensidade, distancia
@@ -109,13 +117,34 @@ scene.add(pointLight);
 
 //FUNÇÃO ANIMATE
 function animate() {
-  sun.rotateY(0.0004);
-  mercury.mesh.rotateY(0.008);
-  mercury.obj.rotateY(0.004);
+  sun.rotateY(0.004);
+
+  mercury.mesh.rotateY(0.004);
+  mercury.obj.rotateY(0.04);
+  
+  venus.mesh.rotateY(0.004);
+  venus.obj.rotateY(0.015);
+
+  earth.mesh.rotateY(0.02);
+  earth.obj.rotateY(0.01);
+
+  mars.mesh.rotateY(0.018);
+  mars.obj.rotateY(0.008);
+
+  jupiter.mesh.rotateY(0.04);
+  jupiter.obj.rotateY(0.002);
+
   saturn.mesh.rotateY(0.038);
   saturn.obj.rotateY(0.0009);
-  venus.mesh.rotateY(0.004);
-  venus.obj.rotateY(0.003);
+  
+  uranus.mesh.rotateY(0.03);
+  uranus.obj.rotateY(0.0004);
+
+  neptune.mesh.rotateY(0.001);
+  neptune.obj.rotateY(0.0001);
+
+  pluto.mesh.rotateY(0.008);
+  pluto.obj.rotateY(0.00007)
 
   renderer.render(scene, camera);
 }

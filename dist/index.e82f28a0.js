@@ -614,7 +614,9 @@ var _neptunemapJpgDefault = parcelHelpers.interopDefault(_neptunemapJpg);
 var _plutomapJpg = require("../img/plutomap.jpg");
 var _plutomapJpgDefault = parcelHelpers.interopDefault(_plutomapJpg);
 //Instanciando o renderizador
-const renderer = new _three.WebGLRenderer();
+const renderer = new _three.WebGLRenderer({
+    antialias: true
+});
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 //CRIANDO A CENA
@@ -626,7 +628,7 @@ const orbit = new (0, _orbitControlsJs.OrbitControls)(camera, renderer.domElemen
 camera.position.set(-90, 140, 140);
 orbit.update();
 //LUX AMBIENTE DA CENA
-const ambientLight = new _three.AmbientLight(0x333333, 3);
+const ambientLight = new _three.AmbientLight(0x333333, 7);
 scene.add(ambientLight);
 //ADICIONANDO TEXTURA NO BACKGROUND DA CENA
 const cubeTextureLoader = new _three.CubeTextureLoader();
@@ -675,25 +677,47 @@ function createPlanet(size, texture, position, ring) {
 }
 //PLANETS
 const mercury = createPlanet(3.2, (0, _mercurymapJpgDefault.default), 28);
-const venus = createPlanet(6, (0, _venusmapJpgDefault.default), 50);
+const venus = createPlanet(5.8, (0, _venusmapJpgDefault.default), 50);
+const earth = createPlanet(6, (0, _earthMap1KJpgDefault.default), 62);
+const mars = createPlanet(4, (0, _marsJpgDefault.default), 78);
+const jupiter = createPlanet(12, (0, _jupitermapJpgDefault.default), 100);
 const saturn = createPlanet(10, (0, _saturnmapJpgDefault.default), 138, {
     innerRadius: 10,
     outerRadius: 20,
     texture: (0, _saturnringcolorPngDefault.default)
 });
+const uranus = createPlanet(7, (0, _uranusmapJpgDefault.default), 176, {
+    innerRadius: 7,
+    outerRadius: 17,
+    texture: (0, _uranusringcolourJpgDefault.default)
+});
+const neptune = createPlanet(7, (0, _neptunemapJpgDefault.default), 200);
+const pluto = createPlanet(2.8, (0, _plutomapJpgDefault.default), 216);
 //POINTLIGHT
 //Parâmetros: cor, intensidade, distancia
 const pointLight = new _three.PointLight(0xffffff, 20000, 300);
 scene.add(pointLight);
 //FUNÇÃO ANIMATE
 function animate() {
-    sun.rotateY(0.0004);
-    mercury.mesh.rotateY(0.008);
-    mercury.obj.rotateY(0.004);
+    sun.rotateY(0.004);
+    mercury.mesh.rotateY(0.004);
+    mercury.obj.rotateY(0.04);
+    venus.mesh.rotateY(0.004);
+    venus.obj.rotateY(0.015);
+    earth.mesh.rotateY(0.02);
+    earth.obj.rotateY(0.01);
+    mars.mesh.rotateY(0.018);
+    mars.obj.rotateY(0.008);
+    jupiter.mesh.rotateY(0.04);
+    jupiter.obj.rotateY(0.002);
     saturn.mesh.rotateY(0.038);
     saturn.obj.rotateY(0.0009);
-    venus.mesh.rotateY(0.004);
-    venus.obj.rotateY(0.003);
+    uranus.mesh.rotateY(0.03);
+    uranus.obj.rotateY(0.0004);
+    neptune.mesh.rotateY(0.001);
+    neptune.obj.rotateY(0.0001);
+    pluto.mesh.rotateY(0.008);
+    pluto.obj.rotateY(0.00007);
     renderer.render(scene, camera);
 }
 renderer.setAnimationLoop(animate);
@@ -704,7 +728,7 @@ window.addEventListener("resize", ()=>{
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","../img/stars.jpg":"2IYlH","../img/sunmap.jpg":"hnzhn","../img/mercurymap.jpg":"abGYH","../img/venusmap.jpg":"13Whs","../img/earthMap1k.jpg":"g7MLT","../img/mars.jpg":"k8Zkt","../img/jupitermap.jpg":"aoCD2","../img/saturnmap.jpg":"iASAy","../img/uranusmap.jpg":"lpiK9","../img/uranusringcolour.jpg":"l6K4I","../img/neptunemap.jpg":"7hdKj","../img/plutomap.jpg":"3gAeJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../img/saturnringcolor.png":"5VuNt"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","../img/stars.jpg":"2IYlH","../img/sunmap.jpg":"hnzhn","../img/mercurymap.jpg":"abGYH","../img/venusmap.jpg":"13Whs","../img/earthMap1k.jpg":"lj8Lb","../img/mars.jpg":"k8Zkt","../img/jupitermap.jpg":"aoCD2","../img/saturnmap.jpg":"iASAy","../img/saturnringcolor.png":"5VuNt","../img/uranusmap.jpg":"lpiK9","../img/uranusringcolour.jpg":"l6K4I","../img/neptunemap.jpg":"7hdKj","../img/plutomap.jpg":"3gAeJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2024 Three.js Authors
@@ -33048,10 +33072,10 @@ module.exports = require("9c51628bc9d7a3b1").getBundleURL("2MSMO") + "mercurymap
 },{"9c51628bc9d7a3b1":"lgJ39"}],"13Whs":[function(require,module,exports) {
 module.exports = require("2b02fc0f644a7a19").getBundleURL("2MSMO") + "venusmap.137a5c1f.jpg" + "?" + Date.now();
 
-},{"2b02fc0f644a7a19":"lgJ39"}],"g7MLT":[function(require,module,exports) {
-module.exports = require("b6f4e9d6be2ec78d").getBundleURL("2MSMO") + "earthmap1k.ea0d520b.jpg" + "?" + Date.now();
+},{"2b02fc0f644a7a19":"lgJ39"}],"lj8Lb":[function(require,module,exports) {
+module.exports = require("bbb209d20bed0e33").getBundleURL("2MSMO") + "earthMap1k.fe6c8ab4.jpg" + "?" + Date.now();
 
-},{"b6f4e9d6be2ec78d":"lgJ39"}],"k8Zkt":[function(require,module,exports) {
+},{"bbb209d20bed0e33":"lgJ39"}],"k8Zkt":[function(require,module,exports) {
 module.exports = require("4896c1fe45bc18b8").getBundleURL("2MSMO") + "mars.39828838.jpg" + "?" + Date.now();
 
 },{"4896c1fe45bc18b8":"lgJ39"}],"aoCD2":[function(require,module,exports) {
@@ -33060,7 +33084,10 @@ module.exports = require("89b58ab304228b0b").getBundleURL("2MSMO") + "jupitermap
 },{"89b58ab304228b0b":"lgJ39"}],"iASAy":[function(require,module,exports) {
 module.exports = require("978735b372e19d46").getBundleURL("2MSMO") + "saturnmap.cd77eee8.jpg" + "?" + Date.now();
 
-},{"978735b372e19d46":"lgJ39"}],"lpiK9":[function(require,module,exports) {
+},{"978735b372e19d46":"lgJ39"}],"5VuNt":[function(require,module,exports) {
+module.exports = require("2cbbff37d6df037").getBundleURL("2MSMO") + "saturnringcolor.25d2b970.png" + "?" + Date.now();
+
+},{"2cbbff37d6df037":"lgJ39"}],"lpiK9":[function(require,module,exports) {
 module.exports = require("c3e0c9e069ac65e9").getBundleURL("2MSMO") + "uranusmap.1d5ec85e.jpg" + "?" + Date.now();
 
 },{"c3e0c9e069ac65e9":"lgJ39"}],"l6K4I":[function(require,module,exports) {
@@ -33072,9 +33099,6 @@ module.exports = require("7c55cac568598e7e").getBundleURL("2MSMO") + "neptunemap
 },{"7c55cac568598e7e":"lgJ39"}],"3gAeJ":[function(require,module,exports) {
 module.exports = require("e4c4e8c7467875ce").getBundleURL("2MSMO") + "plutomap.0b6f49c7.jpg" + "?" + Date.now();
 
-},{"e4c4e8c7467875ce":"lgJ39"}],"5VuNt":[function(require,module,exports) {
-module.exports = require("2cbbff37d6df037").getBundleURL("2MSMO") + "saturnringcolor.25d2b970.png" + "?" + Date.now();
-
-},{"2cbbff37d6df037":"lgJ39"}]},["2L15i","dV6cC"], "dV6cC", "parcelRequire3d9d")
+},{"e4c4e8c7467875ce":"lgJ39"}]},["2L15i","dV6cC"], "dV6cC", "parcelRequire3d9d")
 
 //# sourceMappingURL=index.e82f28a0.js.map
